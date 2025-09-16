@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Amazon.Lambda.Core;
 using Amazon.Lambda.APIGatewayEvents;
+using System.Text.Json;
 
 [assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.SystemTextJson.DefaultLambdaJsonSerializer))]
 
@@ -11,18 +12,39 @@ namespace IaC_example
     {
         public async Task<APIGatewayProxyResponse> HandlerAsync(APIGatewayProxyRequest request)
         {
-            string secretName = "secret_example";
-            string secret = await SecretsManagerUtil.GetSecretAsync(secretName);
 
             uint number = ParseInput(request);
-
             long fib = Fibonacci(number);
-            string body = PrepareBody(secret, number, fib);
+            string env = EnvironmentSettings.Instance.CurrentEnvironment.ToString();
+            var secretNames = new List<string>
+            {
+                "net/MySQL/production",
+                "net/MySQL/main",
+                "prod/tpn",
+                "net/M2M/production",
+                "secret_example"
+            };
+
+            var secretsDict = new Dictionary<string, object>();
+            foreach (var name in secretNames)
+            {
+                secretsDict[name] = await SecretsManagerUtil.GetSecretAsync(name);
+            }
+
+
+            var responseBody = new
+            {
+                result = fib,
+                environment = env,
+                secrets = secretsDict
+            };
+
 
             return new APIGatewayProxyResponse
             {
                 StatusCode = 200,
-                Body = body
+                Body = JsonSerializer.Serialize(responseBody),
+                Headers = new Dictionary<string, string> { { "Content-Type", "application/json" } }
             };
         }
 
@@ -36,20 +58,6 @@ namespace IaC_example
             }
 
             return number;
-        }
-
-        private static string PrepareBody(string secret, uint number, long fib)
-        {
-            string env = EnvironmentSettings.Instance.CurrentEnvironment.ToString();
-
-            string body = $"Environment: {env}\nFibonacci({number}) = {fib}\nSecret: {secret}\n";
-
-            if (EnvironmentSettings.Instance.IsDevelopment)
-                body += "Running in development mode: extra logs enabled.\n";
-
-            if (EnvironmentSettings.Instance.IsProduction)
-                body += "Running in production mode: optimized settings.\n";
-            return body;
         }
 
         private static long Fibonacci(uint value)
