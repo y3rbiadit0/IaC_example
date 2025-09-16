@@ -78,7 +78,7 @@ class LambdaUtil:
     def add_lambda(self, lambda_params: LambdaParameters):
 
         self._build_and_zip_lambda(
-            project_path=self.project_path(lambda_params.function_name),
+            project_path=self.project_path(""),
             output_zip=self._lambda_zip_file(lambda_params.function_name),
         )
 

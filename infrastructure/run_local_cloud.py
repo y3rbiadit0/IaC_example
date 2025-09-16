@@ -16,7 +16,7 @@ logging.basicConfig(level=logging.INFO)
 @click.option(
     "--environment",
     type=click.Choice([m.value for m in Environment], case_sensitive=True),
-    default=Environment.local.value,
+    default=Environment.stage.value,
     help="Select Environment [local | stage | prod]",
 )
 def build_env(environment):

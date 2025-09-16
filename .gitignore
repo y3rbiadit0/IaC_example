@@ -3,3 +3,5 @@ out/
 bin/
 volume/
 __pycache__/
+build/
+publish/

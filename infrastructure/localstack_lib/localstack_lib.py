@@ -68,7 +68,7 @@ class LocalStackBuilder:
 
         if self.environment == Environment.stage:
             self.create_lambdas()
-            # self.api_gateway_util.create_api_gateway()
+            self.api_gateway_util.create_api_gateway()
 
     def create_lambdas(self):
         self.lambda_util.add_lambda(
@@ -78,7 +78,7 @@ class LocalStackBuilder:
                 timeout_secs=900,
                 environment=self.environment,
                 env_vars=self.env_vars,
-                handler="IaC_example::LambdaApp::HandlerAsync"
+                handler="IaC_example::IaC_example.LambdaApp::HandlerAsync"
             )
         )
 

@@ -24,12 +24,12 @@ class APIGatewayUtil:
     @property
     def _api_gateway_stage_file(self):
         return Path.joinpath(
-            self.aws_localstack_dir, "tpn-stage-swagger-apigateway.json"
+            self.aws_localstack_dir, "api_gateway.json"
         )
 
     def create_api_gateway(self):
         api_id = self._create_api_with_custom_id(
-            name=f"tpn-{self.environment}", custom_id=f"tpn-{self.environment}"
+            name=f"iac-example-{self.environment}", custom_id=f"iac-example-{self.environment}"
         )
         self._import_api_definition(
             api_id=api_id, json_file=self._api_gateway_stage_file
