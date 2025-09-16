@@ -1,0 +1,20 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": ".NET-Lambda-Local",
+      "type": "shell",
+      "command": "python3",
+      "args": [
+        "${workspaceFolder}/infrastructure/run_local_cloud.py",
+        "--environment",
+        "local"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    
+  ]
+}

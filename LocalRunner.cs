@@ -7,15 +7,19 @@ namespace IaC_example
     {
         static async Task Main()
         {
-            Env.Load();
+            
+            if (EnvironmentSettings.Instance.IsDebugging)
+            {
+                await LocalLambdaProxy.RunDebuggingServer(async (request) =>
+                {
+                    var lambda = new LambdaApp();
+                    return await lambda.HandlerAsync(request);
+                },
+                routePrefix: "fibonacci",
+                port: 5000);
+                return;
+            }
 
-            var app = new LambdaApp();
-            APIGatewayProxyRequest mockRequest = MockRequest();
-
-            var response = await app.HandlerAsync(mockRequest);
-
-            Console.WriteLine("=== Local Lambda Debug ===");
-            Console.WriteLine(response.Body);
         }
 
         private static APIGatewayProxyRequest MockRequest()

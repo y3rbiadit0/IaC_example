@@ -6,11 +6,23 @@
   },
   "host": "tpn.qboard.cloud",
   "basePath": "/prod",
-  "schemes": [ "https" ],
+  "schemes": [
+    "https"
+  ],
   "paths": {
     "/fibonacci": {
-      "post": {
-        "produces": [ "application/json" ],
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "number",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "200 response",
@@ -40,5 +52,7 @@
       "title": "Empty Schema"
     }
   },
-  "x-amazon-apigateway-binary-media-types": [ "*/*" ]
+  "x-amazon-apigateway-binary-media-types": [
+    "*/*"
+  ]
 }

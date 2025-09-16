@@ -35,9 +35,6 @@ namespace IaC_example
                 config
             );
 
-            Console.WriteLine($"SecretsURL={config.ServiceURL}");
-            Console.WriteLine($"SecretName={secretName}");
-            Console.WriteLine($"region={Environment.GetEnvironmentVariable("AWS_DEFAULT_REGION")}");
             try
             {
                 var request = new GetSecretValueRequest { SecretId = secretName };
