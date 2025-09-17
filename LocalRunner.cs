@@ -10,7 +10,7 @@ namespace IaC_example
 
             if (EnvironmentSettings.Instance.IsDebugging)
             {
-                await LocalLambdaProxy.RunDebuggingServer(async (request) =>
+                await LocalLambdaProxy.RunLocalProxy(async (request) =>
                 {
                     var lambda = new LambdaApp();
                     return await lambda.HandlerAsync(request);

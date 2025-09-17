@@ -11,24 +11,40 @@ namespace IaC_example
     {
         /// <summary>
         /// Starts a local HTTP server that routes POST requests to a Lambda handler.
+        /// Starts a debugger server for VSCode in port 5005 (default)
         /// </summary>
         /// <param name="lambdaHandler">The Lambda handler to invoke.</param>
-        /// <param name="routePrefix">The route prefix for this Lambda (e.g., "query").</param>
-        /// <param name="port">The port to run the local server on.</param>
-        private static void Run(
+        /// <param name="route">The route prefix for this Lambda (e.g., "query").</param>
+        /// <param name="port">The port to run the local HTTP server.</param>
+        public static async Task RunLocalProxy(
             Func<APIGatewayProxyRequest, Task<APIGatewayProxyResponse>> lambdaHandler,
             string routePrefix = "query",
             int port = 5000)
         {
+            await WaitForDebugger();
+
+            Run(lambdaHandler, routePrefix, port);
+        }
+
+        private static void Run(
+            Func<APIGatewayProxyRequest, Task<APIGatewayProxyResponse>> lambdaHandler,
+            string route = "query",
+            int port = 5000)
+        {
             var builder = WebApplication.CreateBuilder();
             var app = builder.Build();
+
+            MapLambdaToRoute(app, route, lambdaHandler);
+
+            Console.WriteLine($"🚀 Local Lambda proxy running on http://0.0.0.0:{port}/{route}");
+            app.Run($"http://0.0.0.0:{port}");
+        }
+
+        private static void MapLambdaToRoute(WebApplication app, string routePrefix, Func<APIGatewayProxyRequest, Task<APIGatewayProxyResponse>> lambdaHandler)
+        {
             app.MapGet($"/{routePrefix}", async (HttpRequest request) =>
             {
-                // Read query parameter "number"
-                request.Query.TryGetValue("number", out var numberValues);
-                string numberStr = numberValues.Count > 0 ? numberValues[0] : "1";
-
-                // Build APIGatewayProxyRequest
+                var numberStr = request.Query["number"].FirstOrDefault() ?? "1";
                 var apiEvent = new APIGatewayProxyRequest
                 {
                     Path = request.Path,
@@ -39,20 +55,13 @@ namespace IaC_example
                     }
                 };
 
-                // Invoke Lambda handler
                 var response = await lambdaHandler(apiEvent);
 
                 return Results.Content(response.Body ?? string.Empty, "application/json");
             });
-
-            Console.WriteLine($"🚀 Local Lambda proxy running on http://0.0.0.0:{port}/{routePrefix}");
-            app.Run($"http://0.0.0.0:{port}");
         }
 
-        public static async Task RunDebuggingServer(
-            Func<APIGatewayProxyRequest, Task<APIGatewayProxyResponse>> handler,
-            string routePrefix = "query",
-            int port = 5000)
+        private static async Task WaitForDebugger()
         {
             Console.WriteLine("Waiting for debugger to attach...");
             while (!System.Diagnostics.Debugger.IsAttached)
@@ -62,8 +71,6 @@ namespace IaC_example
 
             Console.WriteLine("Debugger attached.");
             Console.WriteLine("Starting local proxy server for Postman...");
-
-            Run(handler, routePrefix, port);
         }
     }
 }
