@@ -81,21 +81,3 @@ class LocalStackBuilder:
                 handler="IaC_example::IaC_example.LambdaApp::HandlerAsync"
             )
         )
-
-    def create_queues(self):
-        tpn_regulation_fifo = QueueConfig(
-            name=os.getenv("REGULATION_SQS_CODE_NAME"),
-            lambda_target="tpn-regulation",
-            batch_size=10,
-            batch_window=None,
-            visibility_timeout=300,
-        )
-        tpn_ddd_parser_fifo = QueueConfig(
-            name=os.getenv("DDDPARSER_SQS_CODE_NAME"),
-            lambda_target="tpn-ddd-parser",
-            batch_size=10,
-            batch_window=None,
-            visibility_timeout=600,
-        )
-        queues = [tpn_regulation_fifo, tpn_ddd_parser_fifo]
-        self.queues_util.create_queues(queues)
