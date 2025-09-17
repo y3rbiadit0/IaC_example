@@ -5,4 +5,4 @@ volume/
 __pycache__/
 build/
 publish/
-.zip
+*.zip
