@@ -4,7 +4,7 @@ from dataclasses import dataclass
 
 
 @dataclass
-class LocalStackCreds:
+class CredentialsProvider:
     access_key_id: str
     secret_access_key: str
     url: str
@@ -12,7 +12,7 @@ class LocalStackCreds:
     secrets_file: str
 
     @classmethod
-    def from_env(cls, root_dir: Path) -> "LocalStackCreds":
+    def from_env(cls, root_dir: Path) -> "CredentialsProvider":
         return cls(
             access_key_id=os.getenv("AWS_ACCESS_KEY_ID", "test"),
             secret_access_key=os.getenv("AWS_SECRET_ACCESS_KEY", "test"),

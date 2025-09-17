@@ -6,7 +6,7 @@ import click
 from typing import Dict
 import logging
 
-from localstack_lib import LocalStackBuilder, run_command, Environment
+from infra_lib import AWSInfraBuilder, run_command, Environment
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
@@ -61,7 +61,7 @@ def run_docker_compose(
         env_vars=env_vars,
     )
 
-    LocalStackBuilder(
+    AWSInfraBuilder(
         infrastructure_dir=infrastructure_dir,
         projects_dir=projects_dir,
         environment=environment,

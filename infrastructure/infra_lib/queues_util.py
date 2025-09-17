@@ -3,7 +3,7 @@ import logging
 from dataclasses import dataclass
 from typing import Optional, List
 
-from .creds import LocalStackCreds
+from .creds import CredentialsProvider
 
 
 logger = logging.getLogger(__name__)
@@ -20,7 +20,7 @@ class QueueConfig:
     report_batch_item_failures: bool = False
 
 class QueuesUtil:
-    def __init__(self, creds: LocalStackCreds):
+    def __init__(self, creds: CredentialsProvider):
         self.creds = creds
 
 

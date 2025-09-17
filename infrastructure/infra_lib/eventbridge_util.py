@@ -5,7 +5,7 @@ import boto3
 import logging
 
 from .enums import Environment
-from .creds import LocalStackCreds
+from .creds import CredentialsProvider
 
 
 logger = logging.getLogger(__name__)
@@ -17,12 +17,12 @@ class EventBridgeStackConfig:
 
 
 class EventBridgeUtil:
-    creds: LocalStackCreds
+    creds: CredentialsProvider
     environment: Environment
     _aws_localstack_dir: Path
 
     def __init__(
-        self, creds: LocalStackCreds, aws_localstack_dir: Path, environment: Environment
+        self, creds: CredentialsProvider, aws_localstack_dir: Path, environment: Environment
     ):
         self.creds = creds
         self._aws_localstack_dir: Path = aws_localstack_dir

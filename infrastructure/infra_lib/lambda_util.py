@@ -7,7 +7,7 @@ import zipfile
 
 from .enums import Environment
 from .utils import run_command
-from .creds import LocalStackCreds
+from .creds import CredentialsProvider
 
 logger = logging.getLogger(__name__)
 
@@ -53,12 +53,12 @@ class LambdaParameters:
 class LambdaUtil:
     _infrastructure_dir: Path
     _projects_dir: Path
-    creds: LocalStackCreds
+    creds: CredentialsProvider
     environment: Environment
 
     def __init__(
         self,
-        creds: LocalStackCreds,
+        creds: CredentialsProvider,
         environment: Environment,
         projects_dir: Path,
         infrastructure_dir: Path,

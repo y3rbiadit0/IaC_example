@@ -4,10 +4,10 @@ import logging
 from typing import Dict
 
 
-from .creds import LocalStackCreds
-from .eventbridge_util import EventBridgeStackConfig, EventBridgeUtil
+from .creds import CredentialsProvider
+from .eventbridge_util import EventBridgeUtil
 from .lambda_util import LambdaParameters, LambdaUtil
-from .queues_util import QueueConfig, QueuesUtil
+from .queues_util import QueuesUtil
 from .s3_util import S3Util
 from .secrets_util import SecretsManagerUtil
 from .api_gateway_util import APIGatewayUtil
@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
 
 
-class LocalStackBuilder:
+class AWSInfraBuilder:
     lambda_util: LambdaUtil
     queues_util: QueuesUtil
     s3_util: S3Util
@@ -39,7 +39,7 @@ class LocalStackBuilder:
             self.infrastructure_dir, "aws_localstack"
         )
 
-        self.creds = LocalStackCreds.from_env(root_dir=self._aws_localstack_dir)
+        self.creds = CredentialsProvider.from_env(root_dir=self._aws_localstack_dir)
         self.environment = environment
         self.env_vars = env_vars
 

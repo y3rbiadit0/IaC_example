@@ -4,13 +4,13 @@ from typing import Dict
 import boto3
 import logging
 
-from .creds import LocalStackCreds
+from .creds import CredentialsProvider
 
 logger = logging.getLogger(__name__)
 
 
 class SecretsManagerUtil:
-    def __init__(self, creds: LocalStackCreds):
+    def __init__(self, creds: CredentialsProvider):
         self.creds = creds
 
     def create_secrets(self):
