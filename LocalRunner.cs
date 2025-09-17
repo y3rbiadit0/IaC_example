@@ -7,7 +7,7 @@ namespace IaC_example
     {
         static async Task Main()
         {
-            
+
             if (EnvironmentSettings.Instance.IsDebugging)
             {
                 await LocalLambdaProxy.RunDebuggingServer(async (request) =>
@@ -22,15 +22,5 @@ namespace IaC_example
 
         }
 
-        private static APIGatewayProxyRequest MockRequest()
-        {
-            return new APIGatewayProxyRequest
-            {
-                QueryStringParameters = new Dictionary<string, string>
-                {
-                    { "number", "10" }
-                }
-            };
-        }
     }
 }
