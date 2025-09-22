@@ -2,7 +2,6 @@
   "version": "0.2.0",
   "configurations": [
     {
-      // "preLaunchTask": ".NET-Lambda-Local",
       "name": ".NET-Lambda-Local",
       "type": "coreclr",
       "request": "attach",
@@ -19,14 +18,13 @@
         "quoteArgs": false
       },
       "sourceFileMap": {
-        "/build/": "${workspaceFolder}/"      },
-
+        "/build/": "${workspaceFolder}/"
+      },
       "justMyCode": true,
       "symbolOptions": {
         "searchMicrosoftSymbolServer": true,
         "searchNuGetOrgSymbolServer": true
-      },
-      
+      }
     },
     {
       "name": ".NET-Lambda-Stage",
@@ -39,6 +37,31 @@
       ],
       "cwd": "${workspaceFolder}",
       "console": "integratedTerminal"
+    },
+    {
+      "name": ".NET-Local",
+      "type": "coreclr",
+      "request": "attach",
+      "processId": 1,
+      "pipeTransport": {
+        "pipeProgram": "docker",
+        "pipeArgs": [
+          "exec",
+          "-i",
+          "debug-local"
+        ],
+        "debuggerPath": "/vsdbg/vsdbg",
+        "pipeCwd": "${workspaceFolder}/",
+        "quoteArgs": false
+      },
+      "sourceFileMap": {
+        "/build/": "${workspaceFolder}/"
+      },
+      "justMyCode": true,
+      "symbolOptions": {
+        "searchMicrosoftSymbolServer": true,
+        "searchNuGetOrgSymbolServer": true
+      }
     }
   ]
 }
