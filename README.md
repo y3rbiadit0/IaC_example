@@ -37,7 +37,7 @@ scoop install python
 ```
 7. ⚡Install [.NET 8 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/sdk-8.0.414-windows-x64-installer)
 
-8. Install `infra-lib` CLI
+8. Install `infra-lib` CLI -- `https://github.com/y3rbiadit0/infra_lib/tree/main`
 ```powershell
 https://github.com/y3rbiadit0/infra_lib/tree/main
 ```
