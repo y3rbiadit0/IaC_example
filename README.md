@@ -1,35 +1,11 @@
 # Infrastructure as Code - Sample Project 
 
-<div style="display: flex; justify-content: space-between; align-items: center; margin: 20px 0;">
-
-  <div style="flex: 1; text-align: center; margin: 0 10px;">
-    <a href="https://github.com/localstack/localstack" target="_blank" rel="noopener noreferrer">
-      <img src="https://avatars.githubusercontent.com/u/28732122?s=48&v=4"
-           alt="LocalStack logo"
-           style="max-width: 100%; height: auto; display: block; margin: 0 auto;" />
-    </a>
-    <div style="font-size: 0.9em; margin-top: 6px;">LocalStack</div>
-  </div>
-
-  <div style="flex: 1; text-align: center; margin: 0 10px;">
-    <a href="https://aws.amazon.com/" target="_blank" rel="noopener noreferrer">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg"
-           alt="AWS logo"
-           style="max-width: 100%; height: auto; display: block; margin: 0 auto;" />
-    </a>
-    <div style="font-size: 0.9em; margin-top: 6px;">Amazon Web Services</div>
-  </div>
-
-  <div style="flex: 1; text-align: center; margin: 0 10px;">
-    <a href="https://www.python.org/" target="_blank" rel="noopener noreferrer">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg"
-           alt="Python logo"
-           style="max-width: 100%; height: auto; display: block; margin: 0 auto;" />
-    </a>
-    <div style="font-size: 0.9em; margin-top: 6px;">Python</div>
-  </div>
-
+<div align="center">
+  <img src="https://avatars.githubusercontent.com/u/28732122?s=48&v=4" alt="LocalStack logo" width="60" style="margin: 0 20px;">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS logo" width="60" style="margin: 0 20px;">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" alt="Python logo" width="60" style="margin: 0 20px;">
 </div>
+
 
 
 
