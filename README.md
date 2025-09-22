@@ -33,14 +33,6 @@
 </div>
 
 
-## Fibonacci Lambda with SecretsManager (Infrastructure as Code)
-
-This project demonstrates the use of **Infrastructure as Code (IaC)** to fully manage AWS resources locally and remotely using [LocalStack](https://github.com/localstack/localstack) and .NET 8.  
-The sample deploys a Lambda function that computes Fibonacci numbers, integrates with AWS Secrets Manager, and exposes an API Gateway endpoint — all managed via code.
-
----
-
-
 ## 🛠️ Setup Development (Windows)
 
 ### 🔧 1. Install Dependencies
@@ -69,13 +61,10 @@ scoop install python
 ```
 7. ⚡Install [.NET 8 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/sdk-8.0.414-windows-x64-installer)
 
-8. 
----
-
-python_dotenv
-click
-zipfile
-
+8. Install `infra-lib` CLI
+```powershell
+https://github.com/y3rbiadit0/infra_lib/tree/main
+```
 
 ## Key Concepts
 
@@ -89,12 +78,14 @@ This example shows the benefits of IaC:
 ---
 
 ## Infrastructure as Code (IaC) - `infrastructure/`
+- **Env variables** (`infrastructure/<environment>/.env`):
+  Each environment folder has the environment variables to use when launching the environment.  
 
-- **Python Scripts** (`infrastructure/run_local_cloud.py`):  
-  Automates LocalStack deployment, Lambda creation, API Gateway setup, Secrets creation.
+- **IaC - Code** (`infrastructure/<environment>/infra_<environment>.py`):  
+  Automates LocalStack deployment, Lambda creation, API Gateway setup, Secrets creation. (Describes IaC for each environment)
   
 - **Docker Compose** (`infrastructure/docker-compose.yml`):  
-  Defines containers for LocalStack, Lambda debug container, networking, and environment variables.
+  Defines containers for LocalStack, Debugger container, networking, and environment variables.
 
 - **Dockerfile.debug**:  
   Builds the Lambda container for local debugging.
@@ -106,41 +97,12 @@ This example shows the benefits of IaC:
 
 ---
 
-## Environments
+## Run Project
 
-This project supports multiple environments, each configured via **IaC** and environment variables. The environment affects:
+1. Run -> `infra-cli.exe run --project . --environment "local"` -- Will start a:
+   1. `Localstack`
+   2. `Local server` being able to do requests to the lambda function
+   3. `Debugger Server` to debug the project.
+3. Run -> `infra-cli.exe run --project . --environment "local"` -- Will start a:
+   1. `Localstack` with `Lambda Functions` deployed as `.zip`
 
-- Secrets management
-- Lambda behavior (debug/logging)
-- API Gateway endpoints
-- Any environment-specific configuration
-
----
-
-### Supported Environments
-| Environment | IAC_ENVIRONMENT (ENV Variable) | Description |
-|------------|----------------|-------------|
-| Local      | `local`        | Full local development using LocalStack. Enables debugging and extra logging. |
-| Stage      | `stage`        | Pre-production environment. Simulates production with development settings (LocalStack). |
-| Production | `production`   | Live environment on AWS. Uses real secrets and optimized Lambda settings. |
-
-<div style="text-align: center;">
-  <img src="readme_assets/local_env.png" alt="Local Environment" />
-</div>
-
-<div style="text-align: center;">
-  <img src="readme_assets/stage_env.png" alt="Stage Environment" />
-</div>
-
-
-
---- 
-### Expected Behavior by Environment
-
-| Setting | Local | Stage | Production |
-|---------|-------|-------|------------|
-| Lambda Debug Mode | ✅ | ❌ | ❌ |
-| Fetch Secrets From | LocalStack | LocalStack | AWS Secrets Manager |
-| Logging | Verbose | Standard | Minimal / Optimized |
-| API Gateway | Localhost | LocalStack | Production URL |
-| Deployment | `docker-compose + LocalStack` | IaC scripts → AWS | IaC scripts → AWS |
