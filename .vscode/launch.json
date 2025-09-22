@@ -2,7 +2,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "preLaunchTask": ".NET-Lambda-Local",
+      // "preLaunchTask": ".NET-Lambda-Local",
       "name": ".NET-Lambda-Local",
       "type": "coreclr",
       "request": "attach",

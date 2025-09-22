@@ -16,7 +16,7 @@ namespace IaC_example
         public static EnvironmentSettings Instance => _instance.Value;
 
         public AppEnvironment CurrentEnvironment =>
-            (Environment.GetEnvironmentVariable("IAC_ENVIRONMENT") ?? string.Empty)
+            (Environment.GetEnvironmentVariable("TARGET_ENV") ?? string.Empty)
             .ToLowerInvariant() switch
             {
                 "local" => AppEnvironment.Local,

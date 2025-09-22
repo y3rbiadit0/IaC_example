@@ -40,6 +40,43 @@ The sample deploys a Lambda function that computes Fibonacci numbers, integrates
 
 ---
 
+
+## 🛠️ Setup Development (Windows)
+
+### 🔧 1. Install Dependencies
+1. 🐧 Install [WSL2](https://learn.microsoft.com/en-us/windows/wsl/install) --  Run the following in a **new PowerShell terminal**
+```powershell
+    wsl --install
+```
+2. 📦 Install [Scoop](https://scoop.sh/)-- Check website for latest version/instructions --  Run the following in a **new PowerShell terminal**
+```powershell
+    Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+    Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
+```
+3. 🌱 Install [Git](https://git-scm.com/downloads/win)
+```powershell
+scoop install git
+```
+4. 📝 Install [VSCode](https://code.visualstudio.com/docs/?dv=win64user)
+```powershell
+scoop bucket add extras
+scoop install vscode
+```
+5. 🐳 Install [Docker Desktop](https://docs.docker.com/desktop/setup/install/windows-install/)
+6. 🐍 Install Python
+```powershell
+scoop install python
+```
+7. ⚡Install [.NET 8 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/sdk-8.0.414-windows-x64-installer)
+
+8. 
+---
+
+python_dotenv
+click
+zipfile
+
+
 ## Key Concepts
 
 This example shows the benefits of IaC:
