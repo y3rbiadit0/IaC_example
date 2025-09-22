@@ -18,10 +18,6 @@ namespace IaC_example
             string env = EnvironmentSettings.Instance.CurrentEnvironment.ToString();
             var secretNames = new List<string>
             {
-                "net/MySQL/production",
-                "net/MySQL/main",
-                "prod/tpn",
-                "net/M2M/production",
                 "secret_example"
             };
 
