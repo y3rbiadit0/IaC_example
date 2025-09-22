@@ -5,7 +5,7 @@
 
   <div style="text-align: center; margin: 10px;">
     <a href="https://github.com/localstack/localstack" target="_blank" rel="noopener noreferrer">
-      <img src="https://djeqr6to3dedg.cloudfront.net/repo-logos/localstack/localstack/live/logo-1719665111272.png"
+      <img src="https://djeqr6to3dedg.cloudfront.net/repo-logos/localstack/localstack-pro/live/logo-1719665078450.png"
            alt="LocalStack logo"
            style="max-width: 160px; height: auto; display: block; margin: 0 auto;" />
     </a>
