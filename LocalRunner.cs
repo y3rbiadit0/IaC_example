@@ -1,6 +1,3 @@
-using Amazon.Lambda.APIGatewayEvents;
-using DotNetEnv;
-
 namespace IaC_example
 {
     class LocalRunner

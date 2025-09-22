@@ -27,7 +27,6 @@ namespace IaC_example
 
         public bool IsDebugging => CurrentEnvironment == AppEnvironment.Local;
         public bool IsDevelopment => CurrentEnvironment == AppEnvironment.Local || CurrentEnvironment == AppEnvironment.Stage;
-        
         public bool IsProduction => CurrentEnvironment == AppEnvironment.Production;
     }
 }
