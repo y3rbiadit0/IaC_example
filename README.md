@@ -66,9 +66,6 @@ This example shows the benefits of IaC:
 - **Dockerfile.debug**:  
   Builds the Lambda container for local debugging.
 
-- **localstack_lib**:  
-  Core IaC logic to create secrets, Lambda functions, and API Gateway endpoints programmatically.
-
 > ✅ Everything that would normally be manual in AWS is now fully automated and versioned.
 
 ---
